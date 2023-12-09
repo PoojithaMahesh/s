@@ -28,5 +28,26 @@ public class UserDao {
 			return null;
 		}
 	}
+	public User updateUser(int id, User user) {
+		Optional<User> optional=repo.findById(id);
+		if(optional.isPresent()) {
+//			user is present
+			user.setId(id);
+			return repo.save(user);
+		}	
+		return null;
+	}
 
+	public User deleteUserById(int id) {
+		Optional<User> optional=repo.findById(id);
+		
+		if(optional.isPresent()) {
+			User user=optional.get();
+//			repo.delete(user);
+			repo.deleteById(id);
+			return user;
+		}
+		return null;
+		
+	}
 }
